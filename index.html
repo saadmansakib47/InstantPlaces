@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>InstantPlaces</title>
+</head>
+
+<body>
+<div class="container">
+    <header class="header">
+        <div class="header__logo">
+            <h1>InstantPlaces</h1>
+        </div>
+        <form class="search" id="search-place-form">
+            <input type="text" class="search__field" placeholder="Search for places..." autocomplete="off" id="search-place" />
+            <button class="btn search__btn" type="submit">
+                <img src="icons/magnifying-glass.svg" class="search__icon" alt="Search Icon">
+                <span>Search</span>
+            </button>
+        </form>
+    </header>
+    <div class="filters">
+        <label>
+            <input type="radio" name="type" value="all" checked> All
+        </label>
+        <label>
+            <input type="radio" name="type" value="natural"> Natural
+        </label>
+        <label>
+            <input type="radio" name="type" value="human-built"> Human-built
+        </label>
+        <label>
+            <input type="checkbox" name="facility" value="restaurant"> Restaurant
+        </label>
+        <label>
+            <input type="checkbox" name="facility" value="movie"> Movie
+        </label>
+    </div>
+    <div class="places-grid">
+        <!-- Dynamic content will be inserted here -->
+    </div>
+</div>
+
+<script type="module" src="index.js"></script>
+</body>
+
+</html>

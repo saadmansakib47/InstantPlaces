@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Lalbagh Fort",
+    "image": "images/lalbagh.jpg",
+    "type": "human-built",
+    "facilities": ["restaurant"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Lalbagh_Fort"
+  },
+  {
+    "name": "Ramna Park",
+    "image": "images/ramna.jpg",
+    "type": "natural",
+    "facilities": ["restaurant", "movie"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Ramna_Park"
+  },
+  {
+    "name": "National Parliament House",
+    "image": "images/parliament.jpg",
+    "type": "human-built",
+    "facilities": ["restaurant"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Jatiyo_Sangsad_Bhaban"
+  }
+]

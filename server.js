@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://saadmansakib:BRO3886@cluster0.zyi1g2n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
+mongoose.connect('mongodb+srv://user:password@cluster0.zyi1g2n.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
@@ -33,7 +33,7 @@ app.post('/places', async (req, res) => {
     }
 });
 
-// Create a test place entry
+// To Create a test place entry
 app.get('/test-add-place', async (req, res) => {
     try {
         const newPlace = new Place({
@@ -50,7 +50,7 @@ app.get('/test-add-place', async (req, res) => {
     }
 });
 
-// Retrieve all places
+// Retrieving all places
 app.get('/places', async (req, res) => {
     try {
         const places = await Place.find();
@@ -60,7 +60,7 @@ app.get('/places', async (req, res) => {
     }
 });
 
-// Handle form submission for adding a place
+// Handling form submission for adding a place
 app.post('/add-place', async (req, res) => {
     try {
         const newPlace = new Place({
@@ -82,7 +82,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Start the server
+// Starting the server
 app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });

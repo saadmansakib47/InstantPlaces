@@ -1,5 +1,3 @@
-// index.js
-
 document.addEventListener('DOMContentLoaded', () => {
     const placesGrid = document.querySelector('.places-grid');
     const searchField = document.getElementById('search-place');
@@ -69,3 +67,53 @@ document.addEventListener('DOMContentLoaded', () => {
     filterCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleFilterChange));
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const addPlaceBtn = document.getElementById('add-place-btn');
+    const modal = document.getElementById('add-place-modal');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const mainContent = document.querySelector('.container');
+
+    // Show modal on button click
+    addPlaceBtn.addEventListener('click', () => {
+        modal.style.display = 'block';
+        mainContent.classList.add('blur'); // Apply blur to main content
+    });
+
+    // Close the modal when close button is clicked
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        mainContent.classList.remove('blur'); // Remove blur from main content
+    });
+
+    // Close the modal when clicking outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+            mainContent.classList.remove('blur'); // Remove blur from main content
+        }
+    });
+
+    // Handle form submission
+    const addPlaceForm = document.getElementById('add-place-form');
+    addPlaceForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        // Retrieve form data
+        const formData = new FormData(addPlaceForm);
+        const newPlace = {
+            name: formData.get('place-name'),
+            type: formData.get('place-type'),
+            facilities: [formData.get('place-facility')],
+            image: formData.get('place-image'),
+            detailsLink: formData.get('place-wikipedia')
+        };
+
+        // Process the new place (e.g., save to JSON file, update UI, etc.)
+        console.log('New place:', newPlace);
+
+        // Clear form fields
+        addPlaceForm.reset();
+        modal.style.display = 'none';
+        mainContent.classList.remove('blur'); // Remove blur from main content
+    });
+});

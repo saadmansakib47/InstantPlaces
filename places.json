@@ -19,5 +19,47 @@
     "type": "human-built",
     "facilities": ["restaurant"],
     "detailsLink": "https://en.wikipedia.org/wiki/Jatiyo_Sangsad_Bhaban"
+  },
+  {
+    "name": "Ahsan Manzil",
+    "image": "images/ahsan_manzil.jpg",
+    "type": "human-built",
+    "facilities": ["museum"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Ahsan_Manzil"
+  },
+  {
+    "name": "Dhaka University",
+    "image": "images/dhaka_university.jpg",
+    "type": "human-built",
+    "facilities": ["educational site"],
+    "detailsLink": "https://en.wikipedia.org/wiki/University_of_Dhaka"
+  },
+  {
+    "name": "Dhaka Museum",
+    "image": "images/dhaka_museum.jpg",
+    "type": "human-built",
+    "facilities": ["museum"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Bangladesh_National_Museum"
+  },
+  {
+    "name": "Suhrawardy Udyan",
+    "image": "images/suhrawardy_udyan.jpg",
+    "type": "natural",
+    "facilities": ["park", "historical site"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Suhrawardy_Udyan"
+  },
+  {
+    "name": "Hatirjheel",
+    "image": "images/hatirjheel.jpg",
+    "type": "natural",
+    "facilities": ["restaurant", "park"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Hatirjheel"
+  },
+  {
+    "name": "Bashundhara City",
+    "image": "images/bashundhara_city.jpg",
+    "type": "human-built",
+    "facilities": ["shopping mall", "movie"],
+    "detailsLink": "https://en.wikipedia.org/wiki/Bashundhara_City"
   }
 ]

@@ -23,10 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const placeDiv = document.createElement('div');
             placeDiv.classList.add('place');
             placeDiv.innerHTML = `
-        <img src="${place.image}" alt="${place.name}">
-        <div class="name">${place.name}</div>
-        <div class="criteria">${place.type} | ${place.facilities.join(', ')}</div>
-      `;
+                <img src="${place.image}" alt="${place.name}">
+                <div class="name">${place.name}</div>
+                <div class="criteria">${place.type} | ${place.facilities.join(', ')}</div>
+            `;
             placeDiv.addEventListener('click', () => {
                 window.location.href = place.detailsLink;
             });
@@ -68,3 +68,4 @@ document.addEventListener('DOMContentLoaded', () => {
     filterRadios.forEach(radio => radio.addEventListener('change', handleFilterChange));
     filterCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleFilterChange));
 });
+

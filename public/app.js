@@ -11,19 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let places = [];
 
-    // Fetch initial places data
+    // Fetch initial places data from the server
     fetch('/places.json')
         .then(response => response.json())
         .then(data => {
             places = data;
             displayPlaces(places);
-        })
-        .catch(error => console.error('Error fetching places:', error));
+        });
 
     // Display places in the grid
     function displayPlaces(places) {
         placesGrid.innerHTML = '';
-        places.forEach(place => {
+        places.forEach((place, index) => {
             const placeDiv = document.createElement('div');
             placeDiv.classList.add('place');
             placeDiv.innerHTML = `
@@ -31,11 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="name">${place.name}</div>
                 <div class="criteria">${place.type} | ${place.facilities.join(', ')}</div>
             `;
+            placeDiv.style.backgroundColor = getBackgroundColor(index);
             placeDiv.addEventListener('click', () => {
                 window.location.href = place.detailsLink;
             });
             placesGrid.appendChild(placeDiv);
         });
+    }
+
+    function getBackgroundColor(index) {
+        const colors = ['lightblue', 'lightgreen', 'sandybrown'];
+        return colors[index % 3];
     }
 
     // Handle search input
@@ -44,41 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const filteredPlaces = places.filter(place =>
             place.name.toLowerCase().includes(searchQuery)
         );
-        applyFilters(filteredPlaces);
+        displayPlaces(filteredPlaces);
     });
-
-    // Apply filters
-    function applyFilters(filteredPlaces) {
-        const selectedType = Array.from(filterRadios).find(radio => radio.checked).value;
-        const selectedFacilities = Array.from(filterCheckboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-
-        let filteredPlacesResult = filteredPlaces;
-
-        if (selectedType !== 'all') {
-            filteredPlacesResult = filteredPlacesResult.filter(place => place.type === selectedType);
-        }
-
-        if (selectedFacilities.length > 0) {
-            filteredPlacesResult = filteredPlacesResult.filter(place =>
-                selectedFacilities.every(facility => place.facilities.includes(facility))
-            );
-        }
-
-        displayPlaces(filteredPlacesResult);
-    }
-
-    // Handle filter changes
-    function handleFilterChange() {
-        const filteredPlaces = places.filter(place =>
-            place.name.toLowerCase().includes(searchField.value.toLowerCase())
-        );
-        applyFilters(filteredPlaces);
-    }
-
-    filterRadios.forEach(radio => radio.addEventListener('change', handleFilterChange));
-    filterCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleFilterChange));
 
     // Show modal on button click
     addPlaceBtn.addEventListener('click', () => {
@@ -114,8 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             detailsLink: formData.get('place-wikipedia')
         };
 
-        // Process the new place (e.g., send to server, update UI, etc.)
-        fetch('/add-place', {
+        // Send new place to the server
+        fetch('/places', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -125,7 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 console.log('New place added:', data);
                 places.push(data);
-                applyFilters(places); // Update filtered places
+                displayPlaces(places);
             })
             .catch(error => console.error('Error adding place:', error));
 
@@ -134,4 +106,29 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.style.display = 'none';
         mainContent.classList.remove('blur'); // Remove blur from main content
     });
+
+    // Handle filter changes
+    function handleFilterChange() {
+        const selectedType = Array.from(filterRadios).find(radio => radio.checked).value;
+        const selectedFacilities = Array.from(filterCheckboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        let filteredPlaces = places;
+
+        if (selectedType !== 'all') {
+            filteredPlaces = filteredPlaces.filter(place => place.type === selectedType);
+        }
+
+        if (selectedFacilities.length > 0) {
+            filteredPlaces = filteredPlaces.filter(place =>
+                selectedFacilities.every(facility => place.facilities.includes(facility))
+            );
+        }
+
+        displayPlaces(filteredPlaces);
+    }
+
+    filterRadios.forEach(radio => radio.addEventListener('change', handleFilterChange));
+    filterCheckboxes.forEach(checkbox => checkbox.addEventListener('change', handleFilterChange));
 });
